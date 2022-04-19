@@ -1,9 +1,8 @@
 console.log(data);
 
-let x = Object.keys(data.data.results).length;
-console.log(x);
+//x = Object.keys(data.data.results).length
 
-for (let i = 0; i < Object.keys(data.data.results).length; i++) {
+for (let i = 0; i < 25; i++) {
   let list = document.createElement("li");
   list.innerHTML = data.data.results[i].name;
   document.getElementById("text").appendChild(list);

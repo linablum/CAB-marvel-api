@@ -1,10 +1,16 @@
-console.log(data);
+console.log(data2);
 
 //x = Object.keys(data.data.results).length
 
-for (let i = 0; i < 25; i++) {
+/* for (let i = 0; i < 30; i++) {
   let list = document.createElement("li");
   list.innerHTML = data.data.results[i].name;
+  document.getElementById("text").appendChild(list);
+} */
+
+for (let i = 0; i < Object.keys(data2.data.results).length; i++) {
+  let list = document.createElement("li");
+  list.innerHTML = data2.data.results[i].title;
   document.getElementById("text").appendChild(list);
 }
 

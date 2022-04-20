@@ -1,0 +1,6 @@
+main {
+  color: lightgray;
+  background: url(./img/background.jpeg) center/cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}

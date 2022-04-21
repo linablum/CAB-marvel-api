@@ -14,7 +14,7 @@
     console.log("ERROR!", e);
   }); */
 
-const loadChars = async () => {
+async function loadChars() {
   const res = await fetch(
     "https://gateway.marvel.com:443/v1/public/events?apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957&ts=1&hash=31b62279aa5d465c1ff1206582cea96e&limit=100"
   );
@@ -25,7 +25,7 @@ const loadChars = async () => {
   eventChar(30, "btncheck3", apiData);
   eventChar(0, "btncheck4", apiData);
   eventChar(55, "btncheck5", apiData);
-};
+}
 
 function eventChar(x, y, data) {
   for (

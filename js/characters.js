@@ -1,6 +1,20 @@
 let url =
   "http://gateway.marvel.com/v1/public/characters?apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957&ts=1&hash=31b62279aa5d465c1ff1206582cea96e&limit=100";
 
+/* fetch(
+  "https://gateway.marvel.com:443/v1/public/events?apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957&ts=1&hash=31b62279aa5d465c1ff1206582cea96e&limit=100"
+)
+  .then((res) => {
+    console.log("RESOLVED!", res);
+    return res.json();
+  })
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((e) => {
+    console.log("ERROR!", e);
+  }); */
+
 async function loadChar() {
   const res = await fetch(url);
   const marvelCharacter = await res.json();
@@ -15,7 +29,7 @@ function showCard(data) {
   for (i = 0; i < 10; i++) {
     let divCard = document.createElement("div");
     divCard.classList.add("card", "bg-transparent", "mb-3");
-    divCard.setAttribute("style", "max-width: 540px;");
+    divCard.setAttribute("style", "max-width: 740px;");
     let divRow = document.createElement("div");
     divRow.classList.add("row", "g-0");
     let divColImg = document.createElement("div");
@@ -35,14 +49,12 @@ function showCard(data) {
     pCardText.classList.add("card-text");
     pCardText.innerHTML = data.data.results[i].description;
 
-    divContainer.appendChild(divCard);
-    divCard.appendChild(divRow);
-    divRow.appendChild(divColImg);
-    divRow.appendChild(divColText);
-    divColImg.appendChild(img);
-    divColText.appendChild(divCardBody);
-    divCardBody.appendChild(hCardTitle);
-    divCardBody.appendChild(pCardText);
+    divContainer.append(divCard);
+    divCard.append(divRow);
+    divRow.append(divColImg, divColText);
+    divColImg.append(img);
+    divColText.append(divCardBody);
+    divCardBody.append(hCardTitle, pCardText);
   }
 }
 

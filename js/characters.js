@@ -8,14 +8,6 @@ async function loadChar() {
   console.log(marvelCharacter);
 }
 
-/* function showChar(data) {
-  for (let i = 0; i < 30; i++) {
-    let list = document.createElement("li");
-    list.innerHTML = data.data.results[i].name;
-    document.getElementById("test").appendChild(list);
-  }
-} */
-
 loadChar();
 
 function showCard(data) {

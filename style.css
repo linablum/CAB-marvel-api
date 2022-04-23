@@ -13,3 +13,7 @@ body {
 li {
   list-style: none;
 }
+
+.frosted {
+  backdrop-filter: blur(10px);
+}

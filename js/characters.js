@@ -8,30 +8,21 @@ let divContainer = document.getElementById("container");
   return `ts=${timestamp}&apikey=${ApiKey.PUBLIC}&hash=${md5Hash}`;
 } */
 
-/* fetch(
-  "https://gateway.marvel.com:443/v1/public/events?apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957&ts=1&hash=31b62279aa5d465c1ff1206582cea96e&limit=100"
-)
-  .then((res) => {
-    console.log("RESOLVED!", res);
-    return res.json();
-  })
-  .then((data) => {
-    console.log(data);
-  })
-  .catch((e) => {
-    console.log("ERROR!", e);
-  }); */
+/* async function controller() {
+  loadChar();
+  alphabetCheckBox();
+  showCard(marvelCharacter);
+} */
 
 async function loadChar() {
   const res = await fetch(url);
   const marvelCharacter = await res.json();
-  showCard(marvelCharacter);
-  console.log(marvelCharacter);
+  alphabetButtons(marvelCharacter);
 }
 
 loadChar();
 
-function alphabetCheckBox() {
+function alphabetButtons(data) {
   const alphabetLowerCase = [..."abcdefghijklmnopqrstuvwxyz"];
   const alphabet = alphabetLowerCase.map((letter) => letter.toUpperCase());
   let divRow = document.createElement("div");
@@ -42,27 +33,26 @@ function alphabetCheckBox() {
     let divBox = document.createElement("div");
     divBox.classList.add("btn-group", "mb-4");
     divBox.setAttribute("role", "group");
-    divBox.setAttribute("aria-label", "checkbox group with alphabet");
-    let input = document.createElement("input");
-    input.classList.add("btn-check");
-    input.setAttribute("type", "checkbox");
-    input.setAttribute("id", "btncheck1");
-    input.setAttribute("autocomplete", "off");
-    let label = document.createElement("label");
-    label.classList.add("btn", "btn-outline-light");
-    label.setAttribute("for", "btncheck1");
-    label.innerHTML = alphabet[i];
+    divBox.setAttribute("aria-label", "button group with alphabet");
+    let button = document.createElement("button");
+    button.classList.add("btn", "btn-outline-light");
+    button.setAttribute("type", "button");
+    button.setAttribute("id", `${alphabet[i]}`);
+    button.innerHTML = alphabet[i];
     divContainer.append(divRow);
     divRow.append(divCol);
     divCol.append(divBox);
-    divBox.append(input, label);
+    divBox.append(button);
   }
+  document
+    .getElementById("G")
+    .addEventListener("click", function displayChar() {
+      showCard(data);
+    });
 }
 
-alphabetCheckBox();
-
 function showCard(data) {
-  for (i = 0; i < 15; i++) {
+  for (i = 0; i < 100; i++) {
     let divCard = document.createElement("div");
     divCard.classList.add("card", "bg-transparent", "mb-3", "frosted");
     divCard.setAttribute("style", "max-width:640px");
@@ -116,3 +106,5 @@ searchBar.addEventListener("keyup", (e) => {
 
 // const filter = marvelCharacter.filter((character) => {
 // return character.data.results.name.includes(searchString);
+
+//controller();

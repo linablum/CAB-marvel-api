@@ -24,11 +24,42 @@ let url =
 async function loadChar() {
   const res = await fetch(url);
   const marvelCharacter = await res.json();
-  showCard(marvelCharacter);
+  //showCard(marvelCharacter);
   console.log(marvelCharacter);
 }
 
 loadChar();
+
+let divContainer = document.getElementById("container");
+
+function alphabetCheckBox() {
+  const alphabet = [..."abcdefghijklmnopqrstuvwxyz"];
+  let divRow = document.createElement("div");
+  divRow.classList.add("row");
+  let divCol = document.createElement("div");
+  divCol.classList.add("col-6");
+  for (i = 0; i < alphabet.length; i++) {
+    let divBox = document.createElement("div");
+    divBox.classList.add("btn-group", "mb-4");
+    divBox.setAttribute("role", "group");
+    divBox.setAttribute("aria-label", "checkbox group with alphabet");
+    let input = document.createElement("input");
+    input.classList.add("btn-check");
+    input.setAttribute("type", "checkbox");
+    input.setAttribute("id", "btncheck1");
+    input.setAttribute("autocomplete", "off");
+    let label = document.createElement("label");
+    label.classList.add("btn", "btn-outline-light");
+    label.setAttribute("for", "btncheck1");
+    label.innerHTML = alphabet[i];
+    divContainer.append(divRow);
+    divRow.append(divCol);
+    divCol.append(divBox);
+    divBox.append(input, label);
+  }
+}
+
+alphabetCheckBox();
 
 function showCard(data) {
   let divContainer = document.getElementById("container");
@@ -77,8 +108,6 @@ function showCard(data) {
   }
 }
 
-//<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-
 const searchBar = document.getElementById("search");
 let marvelCharacter = [];
 searchBar.addEventListener("keyup", (e) => {
@@ -86,5 +115,5 @@ searchBar.addEventListener("keyup", (e) => {
   console.log(searchString);
 });
 
-//  const filter = marvelCharacter.filter((character) => {
+// const filter = marvelCharacter.filter((character) => {
 // return character.data.results.name.includes(searchString);

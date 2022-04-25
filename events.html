@@ -14,112 +14,114 @@
     <title>Marvel Up</title>
   </head>
   <body>
-      <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">Marvel Up</a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link" href="./index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./about.html">About</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="events" href="#"
-                    >Events</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./characters.html">Characters</a>
-                </li>
-              </ul>
-              <form class="d-flex">
-                <input
-                  class="form-control me-2"
-                  type="search"
-                  placeholder="Search Character"
-                  aria-label="Search Character"
-                />
-                <button class="btn btn-outline-dark" type="submit">
-                  Search
-                </button>
-              </form>
-            </div>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Marvel Up</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="./index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="events" href="#"
+                  >Events</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./characters.html">Characters</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search Character"
+                aria-label="Search Character"
+              />
+              <button class="btn btn-outline-dark" type="submit">Search</button>
+            </form>
           </div>
-        </nav>
-      </header>
-    </div>
+        </div>
+      </nav>
+    </header>
     <main>
       <div class="p-5">
-      <h1 class="mb-3">Characters In Events</h1>
-      <div
-        class="btn-group mb-4"
-        role="group"
-        aria-label="Basic checkbox toggle button group"
-      >
-        <input
-          type="checkbox"
-          class="btn-check"
-          id="btncheck1"
-          autocomplete="off"
-        />
-        <label class="btn btn-outline-light" for="btncheck1">Civil War</label>
-
-        <input
-          type="checkbox"
-          class="btn-check"
-          id="btncheck2"
-          autocomplete="off"
-        />
-        <label class="btn btn-outline-light" for="btncheck2"
-          >Age of Ultron</label
+        <h1 class="mb-3">Characters In Events</h1>
+        <div
+          class="btn-group mb-4"
+          role="group"
+          aria-label="Basic checkbox toggle button group"
         >
+          <input
+            type="checkbox"
+            class="btn-check"
+            id="btncheck1"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-light" for="btncheck1">Civil War</label>
 
-        <input
-          type="checkbox"
-          class="btn-check"
-          id="btncheck3"
-          autocomplete="off"
-        />
-        <label class="btn btn-outline-light" for="btncheck3">Infinity War</label
-        ><input
-          type="checkbox"
-          class="btn-check"
-          id="btncheck4"
-          autocomplete="off"
-        />
-        <label class="btn btn-outline-light" for="btncheck4"
-          >Acts of Vengeance</label
-        >
-        <input
-          type="checkbox"
-          class="btn-check"
-          id="btncheck5"
-          autocomplete="off"
-        />
-        <label class="btn btn-outline-light" for="btncheck5">Secret Wars</label>
+          <input
+            type="checkbox"
+            class="btn-check"
+            id="btncheck2"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-light" for="btncheck2"
+            >Age of Ultron</label
+          >
+
+          <input
+            type="checkbox"
+            class="btn-check"
+            id="btncheck3"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-light" for="btncheck3"
+            >Infinity War</label
+          ><input
+            type="checkbox"
+            class="btn-check"
+            id="btncheck4"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-light" for="btncheck4"
+            >Acts of Vengeance</label
+          >
+          <input
+            type="checkbox"
+            class="btn-check"
+            id="btncheck5"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-light" for="btncheck5"
+            >Secret Wars</label
+          >
+        </div>
+        <ul id="api-data"></ul>
       </div>
-      <ul id="api-data"></ul>
-    </div>
-  </main>
-  <script src="http://www.myersdaily.org/joseph/javascript/md5.js"></script>
-  <script
+    </main>
+    <script src="http://www.myersdaily.org/joseph/javascript/md5.js"></script>
+    <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-      crossorigin="anonymous"></script>
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/config.js"></script>
     <script src="./js/events.js"></script>
   </body>
 </html>

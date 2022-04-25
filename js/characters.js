@@ -1,5 +1,6 @@
 let url =
   "http://gateway.marvel.com/v1/public/characters?apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957&ts=1&hash=31b62279aa5d465c1ff1206582cea96e&limit=100";
+let divContainer = document.getElementById("container");
 
 /* function getHash() {
   const timestamp = new Date().getTime();
@@ -24,16 +25,15 @@ let url =
 async function loadChar() {
   const res = await fetch(url);
   const marvelCharacter = await res.json();
-  //showCard(marvelCharacter);
+  showCard(marvelCharacter);
   console.log(marvelCharacter);
 }
 
 loadChar();
 
-let divContainer = document.getElementById("container");
-
 function alphabetCheckBox() {
-  const alphabet = [..."abcdefghijklmnopqrstuvwxyz"];
+  const alphabetLowerCase = [..."abcdefghijklmnopqrstuvwxyz"];
+  const alphabet = alphabetLowerCase.map((letter) => letter.toUpperCase());
   let divRow = document.createElement("div");
   divRow.classList.add("row");
   let divCol = document.createElement("div");
@@ -62,7 +62,6 @@ function alphabetCheckBox() {
 alphabetCheckBox();
 
 function showCard(data) {
-  let divContainer = document.getElementById("container");
   for (i = 0; i < 15; i++) {
     let divCard = document.createElement("div");
     divCard.classList.add("card", "bg-transparent", "mb-3", "frosted");

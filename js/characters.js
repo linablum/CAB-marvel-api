@@ -20,16 +20,19 @@ for (let i = 0; i < 1600; i += 100) {
 /* async function controller() {
 } */
 
-/* function fetchAll(urls) {
+function fetchAll(urls) {
   return Promise.all(
     urls.map((url) =>
       fetch(url)
         .then((res) => res.json())
         .then((data) => ({ data, url }))
+        .then((data) => console.log(data))
         .catch((error) => ({ error, url }))
     )
   );
-} */
+}
+
+fetchAll(urls);
 
 async function loadChar() {
   try {
@@ -71,7 +74,6 @@ function alphabetButtons(data) {
         let dataFiltered = data.data.results.filter((letter) => {
           return letter.name.charAt(0) == button.innerHTML;
         });
-        //console.log(dataFiltered);
         showCard(dataFiltered);
       });
   }

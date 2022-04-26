@@ -1,5 +1,6 @@
 let url =
   "http://gateway.marvel.com/v1/public/characters?apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957&ts=1&hash=31b62279aa5d465c1ff1206582cea96e&limit=100";
+let divAlphabet = document.getElementById("alphabet");
 let divContainer = document.getElementById("container");
 
 /* function getHash() {
@@ -17,6 +18,7 @@ let divContainer = document.getElementById("container");
 async function loadChar() {
   const res = await fetch(url);
   const marvelCharacter = await res.json();
+  console.log(marvelCharacter);
   alphabetButtons(marvelCharacter);
 }
 
@@ -39,23 +41,24 @@ function alphabetButtons(data) {
     button.setAttribute("type", "button");
     button.setAttribute("id", `${alphabet[i]}`);
     button.innerHTML = alphabet[i];
-    divContainer.append(divRow);
+    divAlphabet.append(divRow);
     divRow.append(divCol);
     divCol.append(divBox);
     divBox.append(button);
     document
       .getElementById(`${alphabet[i]}`)
       .addEventListener("click", function displayChar() {
-        let dataFiltered = data.data.results[i].name.filter(
-          (letter) => letter.charAt(0) == alphabet[i]
-        );
+        let dataFiltered = data.filter((letter) => {
+          letter.data.results[i].name.startsWith(alphabet[i], 0);
+        });
         showCard(dataFiltered);
       });
   }
 }
 
 function showCard(data) {
-  for (i = 0; i < 100; i++) {
+  divContainer.innerHTML = "";
+  for (i = 0; i < 10; i++) {
     let divCard = document.createElement("div");
     divCard.classList.add("card", "bg-transparent", "mb-3", "frosted");
     divCard.setAttribute("style", "max-width:640px");

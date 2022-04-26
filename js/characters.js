@@ -1,23 +1,26 @@
 let url =
   "http://gateway.marvel.com/v1/public/characters?apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957&ts=1&hash=31b62279aa5d465c1ff1206582cea96e&limit=100&offset=100";
+let url1 =
+  "http://gateway.marvel.com/v1/public/characters?apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957&ts=1&hash=31b62279aa5d465c1ff1206582cea96e&limit=100&offset=";
 let divAlphabet = document.getElementById("alphabet");
 let divContainer = document.getElementById("container");
 
-let urls = for (let i = 0; i < 1600; i + 100) {
-  const url = "http://gateway.marvel.com/v1/public/characters?apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957&ts=1&hash=31b62279aa5d465c1ff1206582cea96e&limit=100&offset=";
-  url.push[i];
+let urls = [];
+for (let i = 0; i < 1600; i += 100) {
+  urls.push(url1 + i);
 }
-  
-  /* function getHash() {
+//console.log(urls);
+
+/* function getHash() {
   const timestamp = new Date().getTime();
   const md5Hash = md5(timestamp + ApiKey_PRIVATE + ApiKey_PUBLIC);
   return `ts=${timestamp}&apikey=${ApiKey.PUBLIC}&hash=${md5Hash}`;
 } */
 
-  /* async function controller() {
+/* async function controller() {
 } */
 
-  /* function fetchAll(urls) {
+/* function fetchAll(urls) {
   return Promise.all(
     urls.map((url) =>
       fetch(url)
@@ -28,16 +31,16 @@ let urls = for (let i = 0; i < 1600; i + 100) {
   );
 } */
 
-  async function loadChar() {
-    try {
-      const res = await fetch(url);
-      const marvelCharacter = await res.json();
-      //console.log(marvelCharacter);
-      alphabetButtons(marvelCharacter);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+async function loadChar() {
+  try {
+    const res = await fetch(url);
+    const marvelCharacter = await res.json();
+    //console.log(marvelCharacter);
+    alphabetButtons(marvelCharacter);
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 loadChar();
 

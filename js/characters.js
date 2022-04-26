@@ -1,27 +1,43 @@
 let url =
-  "http://gateway.marvel.com/v1/public/characters?apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957&ts=1&hash=31b62279aa5d465c1ff1206582cea96e&limit=100";
+  "http://gateway.marvel.com/v1/public/characters?apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957&ts=1&hash=31b62279aa5d465c1ff1206582cea96e&limit=100&offset=100";
 let divAlphabet = document.getElementById("alphabet");
 let divContainer = document.getElementById("container");
 
-/* function getHash() {
+let urls = for (let i = 0; i < 1600; i + 100) {
+  const url = "http://gateway.marvel.com/v1/public/characters?apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957&ts=1&hash=31b62279aa5d465c1ff1206582cea96e&limit=100&offset=";
+  url.push[i];
+}
+  
+  /* function getHash() {
   const timestamp = new Date().getTime();
-  const md5Hash = md5(timestamp + ApiKey.PRIVATE + ApiKey.PUBLIC);
+  const md5Hash = md5(timestamp + ApiKey_PRIVATE + ApiKey_PUBLIC);
   return `ts=${timestamp}&apikey=${ApiKey.PUBLIC}&hash=${md5Hash}`;
 } */
 
-/* async function controller() {
+  /* async function controller() {
 } */
 
-async function loadChar() {
-  try {
-    const res = await fetch(url);
-    const marvelCharacter = await res.json();
-    console.log(marvelCharacter);
-    alphabetButtons(marvelCharacter);
-  } catch (err) {
-    console.log(err);
-  }
-}
+  /* function fetchAll(urls) {
+  return Promise.all(
+    urls.map((url) =>
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => ({ data, url }))
+        .catch((error) => ({ error, url }))
+    )
+  );
+} */
+
+  async function loadChar() {
+    try {
+      const res = await fetch(url);
+      const marvelCharacter = await res.json();
+      //console.log(marvelCharacter);
+      alphabetButtons(marvelCharacter);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
 loadChar();
 
@@ -50,16 +66,15 @@ function alphabetButtons(data) {
       .getElementById(`${alphabet[i]}`)
       .addEventListener("click", function displayChar() {
         let dataFiltered = data.data.results.filter((letter) => {
-          console.log(letter);
-          letter.name.startsWith(alphabet[i], 0);
+          return letter.name.charAt(0) == button.innerHTML;
         });
-        console.log(dataFiltered);
-        showCard(data);
+        //console.log(dataFiltered);
+        showCard(dataFiltered);
       });
   }
 }
 
-function showCard(data) {
+function showCard(dataFiltered) {
   divContainer.innerHTML = "";
   for (i = 0; i < 10; i++) {
     let divCard = document.createElement("div");
@@ -74,9 +89,7 @@ function showCard(data) {
     img.classList.add("rounded-start", "img-fluid");
     img.setAttribute(
       "src",
-      data.data.results[i].thumbnail.path +
-        "." +
-        data.data.results[i].thumbnail.extension
+      dataFiltered[i].thumbnail.path + "." + dataFiltered[i].thumbnail.extension
     );
     img.setAttribute("style", "width: 7rem");
     let divColText = document.createElement("div");
@@ -85,16 +98,15 @@ function showCard(data) {
     divCardBody.classList.add("card-body");
     let hCardTitle = document.createElement("h5");
     hCardTitle.classList.add("card-title");
-    hCardTitle.innerHTML = data.data.results[i].name;
+    hCardTitle.innerHTML = dataFiltered[i].name;
     let pCardText = document.createElement("p");
     pCardText.classList.add("card-text");
     let pCardSmall = document.createElement("p");
     pCardSmall.classList.add("card-text");
-    pCardText.innerHTML = data.data.results[i].description;
+    pCardText.innerHTML = dataFiltered[i].description;
     let small = document.createElement("small");
     small.classList.add("text-muted");
-    small.innerHTML =
-      "Number of comics: " + data.data.results[i].comics.available;
+    small.innerHTML = "Number of comics: " + dataFiltered[i].comics.available;
 
     divContainer.append(divCard);
     divCard.append(divRow);

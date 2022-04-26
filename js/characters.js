@@ -43,12 +43,15 @@ function alphabetButtons(data) {
     divRow.append(divCol);
     divCol.append(divBox);
     divBox.append(button);
+    document
+      .getElementById(`${alphabet[i]}`)
+      .addEventListener("click", function displayChar() {
+        let dataFiltered = data.data.results[i].name.filter(
+          (letter) => letter.charAt(0) == alphabet[i]
+        );
+        showCard(dataFiltered);
+      });
   }
-  document
-    .getElementById("G")
-    .addEventListener("click", function displayChar() {
-      showCard(data);
-    });
 }
 
 function showCard(data) {

@@ -10,16 +10,17 @@ let divContainer = document.getElementById("container");
 } */
 
 /* async function controller() {
-  loadChar();
-  alphabetCheckBox();
-  showCard(marvelCharacter);
 } */
 
 async function loadChar() {
-  const res = await fetch(url);
-  const marvelCharacter = await res.json();
-  console.log(marvelCharacter);
-  alphabetButtons(marvelCharacter);
+  try {
+    const res = await fetch(url);
+    const marvelCharacter = await res.json();
+    console.log(marvelCharacter);
+    alphabetButtons(marvelCharacter);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 loadChar();
@@ -48,10 +49,12 @@ function alphabetButtons(data) {
     document
       .getElementById(`${alphabet[i]}`)
       .addEventListener("click", function displayChar() {
-        let dataFiltered = data.filter((letter) => {
-          letter.data.results[i].name.startsWith(alphabet[i], 0);
+        let dataFiltered = data.data.results.filter((letter) => {
+          console.log(letter);
+          letter.name.startsWith(alphabet[i], 0);
         });
-        showCard(dataFiltered);
+        console.log(dataFiltered);
+        showCard(data);
       });
   }
 }

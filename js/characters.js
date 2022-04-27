@@ -1,40 +1,18 @@
 let url =
-  "http://gateway.marvel.com/v1/public/characters?apikey=6689d8f8c4ff142c7814669e36de1ba7&ts=1&hash=ee4c52725ac48dd69be2f06c2fd8aca1&limit=100&offset=";
+  "http://gateway.marvel.com/v1/public/characters?" +
+  getHash() +
+  "&limit=100&offset=";
 
 let urls = [];
-for (let i = 0; i < 500; i += 100) {
+for (let i = 0; i < 300; i += 100) {
   urls.push(url + i);
 }
 
-let divAlphabet = document.getElementById("alphabet");
-let divContainer = document.getElementById("container");
-
-/* function getHash() {
+function getHash() {
   const timestamp = new Date().getTime();
-  const md5Hash = md5(timestamp + API_KEY_PRIVATE + API_KEY_PUBLIC);
-  return `ts=${timestamp}&apikey=${ApiKey.PUBLIC}&hash=${md5Hash}`;
-} */
-
-/* async function controller() {
-} */
-
-/* async function fetchCharacters() {
-  try {
-    const data = await Promise.all(
-      urls.map((url) => fetch(url).then((res) => res.json()))
-    );
-    console.log(data);
-    //let finalData = { ...data };
-    //console.log(finalData);
-    //let marvelCharacter = Object.values(data);
-    //console.log(Object.values(marvelCharacter).flat());
-    //console.log(data[6].data.results[2].name);
-    alphabetButtons(data);
-  } catch (err) {
-    console.log(err);
-  }
+  const md5Hash = md5(timestamp + API_KEY_PRIVATE_2 + API_KEY_PUBLIC_2);
+  return `apikey=${API_KEY_PUBLIC_2}&ts=${timestamp}&hash=${md5Hash}`;
 }
- */
 
 async function fetchCharacters() {
   try {
@@ -43,13 +21,12 @@ async function fetchCharacters() {
       urls.map((url) =>
         fetch(url)
           .then((res) => res.json())
-          .then((results) => {
-            allArray.push(...results.data.results);
+          .then((res) => {
+            allArray.push(...res.data.results);
           })
       )
     );
     console.log("allArray", allArray);
-    console.log(allArray[1].name);
     alphabetButtons(allArray);
   } catch (err) {
     console.log(err);
@@ -58,18 +35,7 @@ async function fetchCharacters() {
 
 fetchCharacters();
 
-/* async function loadChar() {
-  try {
-    const res = await fetch(url);
-    const marvelCharacter = await res.json();
-    alphabetButtons(marvelCharacter);
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-loadChar();
- */
+let divAlphabet = document.getElementById("alphabet");
 
 function alphabetButtons(data) {
   const alphabetLowerCase = [..."abcdefghijklmnopqrstuvwxyz"];
@@ -102,6 +68,8 @@ function alphabetButtons(data) {
       });
   }
 }
+
+let divContainer = document.getElementById("container");
 
 function showCard(dataFiltered) {
   divContainer.innerHTML = "";
@@ -157,4 +125,4 @@ searchBar.addEventListener("keyup", (e) => {
 // const filter = marvelCharacter.filter((character) => {
 // return character.data.results.name.includes(searchString);
 
-//controller();
+//controller function?

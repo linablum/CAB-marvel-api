@@ -1,15 +1,13 @@
 let url =
-  "http://gateway.marvel.com/v1/public/characters?apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957&ts=1&hash=31b62279aa5d465c1ff1206582cea96e&limit=100&offset=100";
-let url1 =
   "http://gateway.marvel.com/v1/public/characters?apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957&ts=1&hash=31b62279aa5d465c1ff1206582cea96e&limit=100&offset=";
-let divAlphabet = document.getElementById("alphabet");
-let divContainer = document.getElementById("container");
 
 let urls = [];
 for (let i = 0; i < 1600; i += 100) {
-  urls.push(url1 + i);
+  urls.push(url + i);
 }
-//console.log(urls);
+
+let divAlphabet = document.getElementById("alphabet");
+let divContainer = document.getElementById("container");
 
 /* function getHash() {
   const timestamp = new Date().getTime();
@@ -20,25 +18,26 @@ for (let i = 0; i < 1600; i += 100) {
 /* async function controller() {
 } */
 
-function fetchAll(urls) {
-  return Promise.all(
-    urls.map((url) =>
-      fetch(url)
-        .then((res) => res.json())
-        .then((data) => ({ data, url }))
-        .then((data) => console.log(data))
-        .catch((error) => ({ error, url }))
-    )
-  );
+async function fetchCharacters() {
+  try {
+    const data = await Promise.all(
+      urls.map((url) => fetch(url).then((res) => res.json()))
+    );
+    let marvelCharacter = Object.values(data);
+    console.log(Object.values(marvelCharacter).flat());
+    console.log(data[2].data.results[2].name);
+    alphabetButtons(marvelCharacter);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-fetchAll(urls);
+fetchCharacters();
 
-async function loadChar() {
+/* async function loadChar() {
   try {
     const res = await fetch(url);
     const marvelCharacter = await res.json();
-    //console.log(marvelCharacter);
     alphabetButtons(marvelCharacter);
   } catch (err) {
     console.log(err);
@@ -46,7 +45,7 @@ async function loadChar() {
 }
 
 loadChar();
-
+ */
 function alphabetButtons(data) {
   const alphabetLowerCase = [..."abcdefghijklmnopqrstuvwxyz"];
   const alphabet = alphabetLowerCase.map((letter) => letter.toUpperCase());

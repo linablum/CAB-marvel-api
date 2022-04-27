@@ -1,8 +1,8 @@
 let url =
-  "http://gateway.marvel.com/v1/public/characters?apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957&ts=1&hash=31b62279aa5d465c1ff1206582cea96e&limit=100&offset=";
+  "http://gateway.marvel.com/v1/public/characters?apikey=6689d8f8c4ff142c7814669e36de1ba7&ts=1&hash=ee4c52725ac48dd69be2f06c2fd8aca1&limit=100&offset=";
 
 let urls = [];
-for (let i = 0; i < 1600; i += 100) {
+for (let i = 0; i < 500; i += 100) {
   urls.push(url + i);
 }
 
@@ -11,7 +11,7 @@ let divContainer = document.getElementById("container");
 
 /* function getHash() {
   const timestamp = new Date().getTime();
-  const md5Hash = md5(timestamp + ApiKey_PRIVATE + ApiKey_PUBLIC);
+  const md5Hash = md5(timestamp + API_KEY_PRIVATE + API_KEY_PUBLIC);
   return `ts=${timestamp}&apikey=${ApiKey.PUBLIC}&hash=${md5Hash}`;
 } */
 
@@ -23,10 +23,13 @@ async function fetchCharacters() {
     const data = await Promise.all(
       urls.map((url) => fetch(url).then((res) => res.json()))
     );
-    let marvelCharacter = Object.values(data);
-    console.log(Object.values(marvelCharacter).flat());
-    console.log(data[2].data.results[2].name);
-    alphabetButtons(marvelCharacter);
+    console.log(data);
+    //let finalData = { ...data };
+    //console.log(finalData);
+    //let marvelCharacter = Object.values(data);
+    //console.log(Object.values(marvelCharacter).flat());
+    //console.log(data[6].data.results[2].name);
+    alphabetButtons(data);
   } catch (err) {
     console.log(err);
   }
@@ -70,17 +73,21 @@ function alphabetButtons(data) {
     document
       .getElementById(`${alphabet[i]}`)
       .addEventListener("click", function displayChar() {
-        let dataFiltered = data.data.results.filter((letter) => {
-          return letter.name.charAt(0) == button.innerHTML;
-        });
-        showCard(dataFiltered);
+        for (let i = 0; i < data.length; i++) {
+          let dataFiltered = data[i].data.results.filter((letter) => {
+            return letter.name.charAt(0) == button.innerHTML;
+          });
+          console.log(dataFiltered);
+          console.log(dataFiltered[i].name);
+          showCard(dataFiltered);
+        }
       });
   }
 }
 
 function showCard(dataFiltered) {
   divContainer.innerHTML = "";
-  for (i = 0; i < 10; i++) {
+  for (i = 0; i < dataFiltered.length; i++) {
     let divCard = document.createElement("div");
     divCard.classList.add("card", "bg-transparent", "mb-3", "frosted");
     divCard.setAttribute("style", "max-width:640px");

@@ -18,7 +18,7 @@ let divContainer = document.getElementById("container");
 /* async function controller() {
 } */
 
-async function fetchCharacters() {
+/* async function fetchCharacters() {
   try {
     const data = await Promise.all(
       urls.map((url) => fetch(url).then((res) => res.json()))
@@ -30,6 +30,27 @@ async function fetchCharacters() {
     //console.log(Object.values(marvelCharacter).flat());
     //console.log(data[6].data.results[2].name);
     alphabetButtons(data);
+  } catch (err) {
+    console.log(err);
+  }
+}
+ */
+
+async function fetchCharacters() {
+  try {
+    const allArray = [];
+    const data = await Promise.all(
+      urls.map((url) =>
+        fetch(url)
+          .then((res) => res.json())
+          .then((results) => {
+            allArray.push(...results.data.results);
+          })
+      )
+    );
+    console.log("allArray", allArray);
+    console.log(allArray[1].name);
+    alphabetButtons(allArray);
   } catch (err) {
     console.log(err);
   }
@@ -49,6 +70,7 @@ fetchCharacters();
 
 loadChar();
  */
+
 function alphabetButtons(data) {
   const alphabetLowerCase = [..."abcdefghijklmnopqrstuvwxyz"];
   const alphabet = alphabetLowerCase.map((letter) => letter.toUpperCase());
@@ -73,14 +95,10 @@ function alphabetButtons(data) {
     document
       .getElementById(`${alphabet[i]}`)
       .addEventListener("click", function displayChar() {
-        for (let i = 0; i < data.length; i++) {
-          let dataFiltered = data[i].data.results.filter((letter) => {
-            return letter.name.charAt(0) == button.innerHTML;
-          });
-          console.log(dataFiltered);
-          console.log(dataFiltered[i].name);
-          showCard(dataFiltered);
-        }
+        let dataFiltered = data.filter((letter) => {
+          return letter.name.charAt(0) == button.innerHTML;
+        });
+        showCard(dataFiltered);
       });
   }
 }

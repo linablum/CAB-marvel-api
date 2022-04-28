@@ -4,44 +4,65 @@ function getHash() {
   return `apikey=${API_KEY_PUBLIC_2}&ts=${timestamp}&hash=${md5Hash}`;
 }
 
-/* let urlXXX =
+let url =
   "http://gateway.marvel.com/v1/public/characters?" +
   getHash() +
   "&limit=100&offset=";
- */
-let url =
-  "http://gateway.marvel.com/v1/public/events?" + getHash() + "&limit=100";
 
-async function loadChars() {
-  const res = await fetch(url);
-  const apiData = await res.json();
-  console.log(apiData);
-  const eventArray = [15, 2, 30, 0, 55];
-  return eventArray.map((num, i) =>
-    eventChar(num, `btncheck${i + 1}`, apiData)
-  );
+let urls = [];
+for (let i = 0; i < 300; i += 100) {
+  urls.push(url + i);
 }
 
-loadChars();
+async function fetchCharacters() {
+  try {
+    const allArray = [];
+    const data = await Promise.all(
+      urls.map((url) =>
+        fetch(url)
+          .then((res) => res.json())
+          .then((res) => {
+            allArray.push(...res.data.results);
+          })
+      )
+    );
+    console.log("allArray", allArray);
+    charEvents(allArray);
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-function eventChar(x, y, data) {
-  for (
-    let i = 0;
-    i < Object.keys(data.data.results[x].characters.items).length;
-    i++
-  ) {
+fetchCharacters();
+
+//document.querySelectorAll();
+
+let checkbox = document.getElementById("btncheck1");
+function charEvents(data) {
+  checkbox.addEventListener("change", function filterChar() {
+    let dataFiltered = data.filter((event) => {
+      return event.name.charAt(0) == "B";
+      //return event.events.items.name == "Civil War";
+    });
+    console.log(dataFiltered);
+    showChar(dataFiltered);
+  });
+}
+
+function showChar(characters) {
+  document.getElementById("api-data").innerHTML = "";
+  for (let i = 0; i < characters.length; i++) {
     let list = document.createElement("li");
-    list.innerHTML = data.data.results[x].characters.items[i].name;
+    list.innerHTML = characters[i].name;
     document.getElementById("api-data").appendChild(list);
-    list.style.display = "none";
+    /*list.style.display = "none";
 
-    let checkbox = document.getElementById(y);
-    checkbox.addEventListener("change", function displayChar() {
+     checkbox.addEventListener("change", function displayChar() {
       if (list.style.display === "none") {
         list.style.display = "block";
       } else {
         list.style.display = "none";
       }
-    });
+    }); */
   }
 }

@@ -24,6 +24,7 @@ async function fetchCharacters() {
         fetch(url)
           .then((res) => res.json())
           .then((res) => {
+            console.log("AllArray", allArray);
             allArray.push(...res.data.results);
             spinner.setAttribute("hidden", "hidden");
           })

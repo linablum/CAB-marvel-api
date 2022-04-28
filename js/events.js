@@ -10,7 +10,7 @@ let url =
   "&limit=100&offset=";
 
 let urls = [];
-for (let i = 0; i < 300; i += 100) {
+for (let i = 0; i < 0; i += 100) {
   urls.push(url + i);
 }
 
@@ -35,14 +35,15 @@ async function fetchCharacters() {
 
 fetchCharacters();
 
-//document.querySelectorAll();
+let checkboxes = Array.from(
+  document.querySelectorAll("input[type='checkbox']:checked")
+).map((checked) => checked.value);
 
-let checkbox = document.getElementById("btncheck1");
 function charEvents(data) {
+  let checkbox = document.getElementById("btncheck1");
   checkbox.addEventListener("change", function filterChar() {
-    let dataFiltered = data.filter((event) => {
-      return event.name.charAt(0) == "B";
-      //return event.events.items.name == "Civil War";
+    let dataFiltered = data.filter((e) => {
+      return e.events.items.some((f) => f.name == "Civil War");
     });
     console.log(dataFiltered);
     showChar(dataFiltered);
@@ -55,14 +56,14 @@ function showChar(characters) {
     let list = document.createElement("li");
     list.innerHTML = characters[i].name;
     document.getElementById("api-data").appendChild(list);
-    /*list.style.display = "none";
-
-     checkbox.addEventListener("change", function displayChar() {
-      if (list.style.display === "none") {
-        list.style.display = "block";
-      } else {
-        list.style.display = "none";
-      }
-    }); */
+    //list.style.display === "block";‚
   }
 }
+
+/* function displayChar() {
+  if (list.style.display === "block") {
+    list.style.display = "none";
+  } else {
+    list.style.display = "block";
+  }
+} */

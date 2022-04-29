@@ -10,7 +10,7 @@ let url =
   "&limit=100&offset=";
 
 let urls = [];
-for (let i = 0; i < 0; i += 100) {
+for (let i = 0; i < 300; i += 100) {
   urls.push(url + i);
 }
 
@@ -27,7 +27,8 @@ async function fetchCharacters() {
       )
     );
     console.log("allArray", allArray);
-    charEvents(allArray);
+    clickCheckbox();
+    //filterEvents(allArray);
   } catch (err) {
     console.log(err);
   }
@@ -35,22 +36,42 @@ async function fetchCharacters() {
 
 fetchCharacters();
 
-let checkboxes = Array.from(
-  document.querySelectorAll("input[type='checkbox']:checked")
-).map((checked) => checked.value);
-
-function charEvents(data) {
-  let checkbox = document.getElementById("btncheck1");
-  checkbox.addEventListener("change", function filterChar() {
-    let dataFiltered = data.filter((e) => {
-      return e.events.items.some((f) => f.name == "Civil War");
+function clickCheckbox(allArray) {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      filterEvents(allArray);
     });
-    console.log(dataFiltered);
-    showChar(dataFiltered);
   });
 }
 
-function showChar(characters) {
+function filterEvents(data) {
+  const checkboxes = Array.from(
+    document.querySelectorAll("input[type='checkbox']:checked")
+  ).map((checked) => checked.value);
+  return (
+    (checkboxes.includes("Civil War") && console.log("First")) ||
+    (checkboxes.includes("Age of Ultron") && console.log("SecondBox")) ||
+    (checkboxes.includes("Infinity War") && console.log("ThirdBox")) ||
+    (checkboxes.includes("Acts of Vengance") && console.log("FourthBox")) ||
+    (checkboxes.includes("Secret War") && console.log("FifthBox"))
+  );
+}
+
+/* function filterEventsXXX(data) {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", function filterChar() {
+      let dataFiltered = data.filter((e) => {
+        return e.events.items.some((f) => f.name == "Age of Ultron");
+      });
+      console.log(dataFiltered);
+      showChars(dataFiltered);
+    });
+  });
+} */
+
+function showChars(characters) {
   document.getElementById("api-data").innerHTML = "";
   for (let i = 0; i < characters.length; i++) {
     let list = document.createElement("li");

@@ -27,8 +27,7 @@ async function fetchCharacters() {
       )
     );
     console.log("allArray", allArray);
-    clickCheckbox();
-    //filterEvents(allArray);
+    clickCheckbox(allArray);
   } catch (err) {
     console.log(err);
   }
@@ -50,26 +49,27 @@ function filterEvents(data) {
     document.querySelectorAll("input[type='checkbox']:checked")
   ).map((checked) => checked.value);
   return (
-    (checkboxes.includes("Civil War") && console.log("First")) ||
-    (checkboxes.includes("Age of Ultron") && console.log("SecondBox")) ||
-    (checkboxes.includes("Infinity War") && console.log("ThirdBox")) ||
-    (checkboxes.includes("Acts of Vengance") && console.log("FourthBox")) ||
-    (checkboxes.includes("Secret War") && console.log("FifthBox"))
+    (checkboxes.includes("Civil War") && filterChars(data, checkboxes)) ||
+    (checkboxes.includes("Age of Ultron") && filterChars(data, checkboxes)) ||
+    (checkboxes.includes("Infinity War") && filterChars(data, checkboxes)) ||
+    (checkboxes.includes("Acts of Vengeance!") &&
+      filterChars(data, checkboxes)) ||
+    (checkboxes.includes("Secret Wars II") && filterChars(data, checkboxes))
   );
 }
 
-/* function filterEventsXXX(data) {
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", function filterChar() {
-      let dataFiltered = data.filter((e) => {
-        return e.events.items.some((f) => f.name == "Age of Ultron");
-      });
-      console.log(dataFiltered);
-      showChars(dataFiltered);
+function filterChars(data, checkboxes) {
+  checkboxes.map((checkbox) => {
+    let result = [];
+    let dataFiltered = data.filter((e) => {
+      return e.events.items.some((f) => f.name == checkbox);
     });
+    console.log("Filtered", dataFiltered);
+    //showChars(dataFiltered);
   });
-} */
+}
+
+//arr4 = arr1.filter((value) => arr2.includes(value) && arr3.includes(value));
 
 function showChars(characters) {
   document.getElementById("api-data").innerHTML = "";

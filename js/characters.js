@@ -19,7 +19,7 @@ const spinner = document.getElementById("spinner");
 async function fetchCharacters() {
   try {
     const allArray = [];
-    const data = await Promise.all(
+    await Promise.all(
       urls.map((url) =>
         fetch(url)
           .then((res) => res.json())

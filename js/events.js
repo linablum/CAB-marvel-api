@@ -10,7 +10,7 @@ let url =
   "&limit=100&offset=";
 
 let urls = [];
-for (let i = 0; i < 1600; i += 100) {
+for (let i = 0; i < 300; i += 100) {
   urls.push(url + i);
 }
 
@@ -49,52 +49,17 @@ function filterEvents(data) {
     document.querySelectorAll("input[type='checkbox']:checked")
   ).map((checked) => checked.value);
   let dataFiltered = data.filter((e) => {
-    return e.events.items.some((f) => checkboxes.includes(f.name));
+    return (
+      e.events.available > 0 &&
+      checkboxes.every((checkbox) =>
+        e.events.items.some((item) => item.name === checkbox)
+      )
+    );
+    //   return e.events.items.some((f) => checkboxes.includes(f.name));
   });
   console.log(dataFiltered);
   showChars(dataFiltered);
 }
-
-/* function filterEvents(data) {
-  const checkboxes = Array.from(
-    document.querySelectorAll("input[type='checkbox']:checked")
-  ).map((checked) => checked.value);
-  let dataFiltered = data.filter((e) => {
-    return e.events.items.some(
-      (f) =>
-        f.name.includes(checkboxes[0]) ||
-        f.name.includes(checkboxes[1]) ||
-        f.name.includes(checkboxes[2]) ||
-        f.name.includes(checkboxes[3]) ||
-        f.name.includes(checkboxes[4])
-    );
-  });
-  console.log(dataFiltered);
-  showChars(dataFiltered);
-}
- */
-/* function filterEvents(data) {
-  const checkboxes = Array.from(
-    document.querySelectorAll("input[type='checkbox']:checked")
-  ).map((checked) => checked.value);
-  let dataFiltered = data.filter((e) => {
-    return e.events.items.some(
-      (f) =>
-        ((((f.name == checkboxes[0]) !== (f.name == checkboxes[1])) !==
-          (f.name == checkboxes[2])) !==
-          (f.name == checkboxes[3])) !==
-        (f.name == checkboxes[4])
-    );
-  });
-  console.log("after", checkboxes.length);
-  console.log(checkboxes);
-  console.log(dataFiltered);
-  showChars(dataFiltered);
-} */
-
-//let result = result1.filter((o1) => !result2.some((o2) => o1.id === o2.id));
-
-//arr4 = arr1.filter((value) => arr2.includes(value) && arr3.includes(value));
 
 function showChars(characters) {
   document.getElementById("api-data").innerHTML = "";

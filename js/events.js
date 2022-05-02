@@ -10,7 +10,7 @@ let url =
   "&limit=100&offset=";
 
 let urls = [];
-for (let i = 0; i < 300; i += 100) {
+for (let i = 0; i < 1600; i += 100) {
   urls.push(url + i);
 }
 
@@ -28,6 +28,7 @@ async function fetchCharacters() {
     );
     console.log("allArray", allArray);
     clickCheckbox(allArray);
+    spinner.setAttribute("hidden", "hidden");
   } catch (err) {
     console.log(err);
   }
@@ -48,28 +49,22 @@ function filterEvents(data) {
   const checkboxes = Array.from(
     document.querySelectorAll("input[type='checkbox']:checked")
   ).map((checked) => checked.value);
-  return (
-    (checkboxes.includes("Civil War") && filterChars(data, checkboxes)) ||
-    (checkboxes.includes("Age of Ultron") && filterChars(data, checkboxes)) ||
-    (checkboxes.includes("Infinity War") && filterChars(data, checkboxes)) ||
-    (checkboxes.includes("Acts of Vengeance!") &&
-      filterChars(data, checkboxes)) ||
-    (checkboxes.includes("Secret Wars II") && filterChars(data, checkboxes))
-  );
-}
-
-function filterChars(data, checkboxes) {
-  checkboxes.map((checkbox) => {
-    let result = [];
-    let dataFiltered = data.filter((e) => {
-      return e.events.items.some((f) => f.name == checkbox);
-    });
-    console.log("Filtered", dataFiltered);
-    //showChars(dataFiltered);
+  let dataFiltered = data.filter((e) => {
+    if (checkboxes.length > 0) {
+      return (
+        e.events.available > 0 &&
+        checkboxes.every((checkbox) =>
+          e.events.items.some((item) => item.name === checkbox)
+        )
+      );
+    } else {
+      return (document.getElementById("api-data").innerHTML = "");
+    }
+    // return e.events.items.some((f) => checkboxes.includes(f.name));
   });
+  console.log(dataFiltered);
+  showChars(dataFiltered);
 }
-
-//arr4 = arr1.filter((value) => arr2.includes(value) && arr3.includes(value));
 
 function showChars(characters) {
   document.getElementById("api-data").innerHTML = "";
@@ -80,11 +75,3 @@ function showChars(characters) {
     //list.style.display === "block";‚
   }
 }
-
-/* function displayChar() {
-  if (list.style.display === "block") {
-    list.style.display = "none";
-  } else {
-    list.style.display = "block";
-  }
-} */

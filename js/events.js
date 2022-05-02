@@ -10,7 +10,7 @@ let url =
   "&limit=100&offset=";
 
 let urls = [];
-for (let i = 0; i < 300; i += 100) {
+for (let i = 0; i < 1600; i += 100) {
   urls.push(url + i);
 }
 
@@ -28,6 +28,7 @@ async function fetchCharacters() {
     );
     console.log("allArray", allArray);
     clickCheckbox(allArray);
+    spinner.setAttribute("hidden", "hidden");
   } catch (err) {
     console.log(err);
   }
@@ -49,13 +50,17 @@ function filterEvents(data) {
     document.querySelectorAll("input[type='checkbox']:checked")
   ).map((checked) => checked.value);
   let dataFiltered = data.filter((e) => {
-    return (
-      e.events.available > 0 &&
-      checkboxes.every((checkbox) =>
-        e.events.items.some((item) => item.name === checkbox)
-      )
-    );
-    //   return e.events.items.some((f) => checkboxes.includes(f.name));
+    if (checkboxes.length > 0) {
+      return (
+        e.events.available > 0 &&
+        checkboxes.every((checkbox) =>
+          e.events.items.some((item) => item.name === checkbox)
+        )
+      );
+    } else {
+      return (document.getElementById("api-data").innerHTML = "");
+    }
+    // return e.events.items.some((f) => checkboxes.includes(f.name));
   });
   console.log(dataFiltered);
   showChars(dataFiltered);
@@ -70,11 +75,3 @@ function showChars(characters) {
     //list.style.display === "block";‚
   }
 }
-
-/* function displayChar() {
-  if (list.style.display === "block") {
-    list.style.display = "none";
-  } else {
-    list.style.display = "block";
-  }
-} */

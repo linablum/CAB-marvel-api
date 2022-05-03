@@ -6,13 +6,11 @@ function getHash() {
 
 const searchCharacter = () => {
   const searchBar = document.getElementById("search");
-  searchBar.addEventListener("change", (e) => {
-    const searchString = e.target.value;
-    console.log("Searchstring", searchString);
-    // fetchCharacter(searchString);
-  });
+  let searchString = "";
+  searchBar.addEventListener("change", (e) => (searchString = e.target.value));
   searchBar.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
+      console.log("Bingo!");
       fetchCharacter(searchString);
     }
   });

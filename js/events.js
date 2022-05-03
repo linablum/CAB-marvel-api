@@ -10,7 +10,7 @@ let url =
   "&limit=100&offset=";
 
 let urls = [];
-for (let i = 0; i < 1600; i += 100) {
+for (let i = 0; i < 300; i += 100) {
   urls.push(url + i);
 }
 
@@ -60,7 +60,6 @@ function filterEvents(data) {
     } else {
       return (document.getElementById("api-data").innerHTML = "");
     }
-    // return e.events.items.some((f) => checkboxes.includes(f.name));
   });
   console.log(dataFiltered);
   showChars(dataFiltered);
@@ -72,6 +71,5 @@ function showChars(characters) {
     let list = document.createElement("li");
     list.innerHTML = characters[i].name;
     document.getElementById("api-data").appendChild(list);
-    //list.style.display === "block";‚
   }
 }

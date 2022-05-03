@@ -118,19 +118,3 @@ function showCard(dataFiltered) {
     pCardSmall.append(small);
   }
 }
-
-const searchBar = document.getElementById("search");
-let marvelCharacter = "";
-searchBar.addEventListener("keyup", (e) => {
-  const searchString = e.target.value;
-  console.log(searchString);
-});
-
-//searchBar.addEventListener("change", (e) => {
-//const searchString = e.target.value;})
-//if (key == "Enter")
-
-// const filter = marvelCharacter.filter((character) => {
-// return character.data.results.name.includes(searchString);
-
-//controller function?

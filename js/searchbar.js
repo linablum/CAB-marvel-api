@@ -4,54 +4,36 @@ function getHash() {
   return `apikey=${API_KEY_PUBLIC_2}&ts=${timestamp}&hash=${md5Hash}`;
 }
 
-let url =
-  "http://gateway.marvel.com/v1/public/characters?limit=100&" + getHash();
-
-const searchBar = document.getElementById("search");
-let marvelCharacter = [];
-searchBar.addEventListener("keyup", (e) => {
-  const searchString = e.target.value;
-  console.log(searchString);
-  const filteredCharacter = marvelCharacter.filter((character) => {
-    return character.name.includes(searchString);
+const searchCharacter = () => {
+  const searchBar = document.getElementById("search");
+  searchBar.addEventListener("change", (e) => {
+    const searchString = e.target.value;
+    console.log("Searchstring", searchString);
+    // fetchCharacter(searchString);
   });
-  console.log(filteredCharacter);
-  showCard(filteredCharacter);
-});
+  searchBar.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
+      fetchCharacter(searchString);
+    }
+  });
+};
 
-const searchCharacters = async () => {
+searchCharacter();
+
+const fetchCharacter = async (characterName) => {
+  let url =
+    `http://gateway.marvel.com/v1/public/characters?name=${characterName}&limit=100&` +
+    getHash();
   try {
     const res = await fetch(url);
     let response = await res.json();
     let marvelCharacter = response.data.results;
-    console.log("Map", marvelCharacter);
-    return showCard(marvelCharacter);
+    console.log("Data", response);
+    showCard(marvelCharacter);
   } catch (err) {
     console.log(err);
   }
 };
-
-searchCharacters();
-/* async function fetchCharacters() {
-  try {
-    const allArray = [];
-    await Promise.all(
-      urls.map((url) =>
-        fetch(url)
-          .then((res) => res.json())
-          .then((res) => {
-            console.log("AllArray", allArray);
-            allArray.push(...res.data.results);
-            spinner.setAttribute("hidden", "hidden");
-          })
-      )
-    );
-    console.log("allArray", allArray);
-    alphabetButtons(allArray);
-  } catch (err) {
-    console.log(err);
-  }
-} */
 
 let divContainer = document.getElementById("container");
 
@@ -98,9 +80,3 @@ function showCard(dataFiltered) {
     pCardSmall.append(small);
   }
 }
-
-//searchBar.addEventListener("change", (e) => {
-//const searchString = e.target.value;})
-//if (key == "Enter")
-
-//https://gateway.marvel.com:443/v1/public/characters?name=spiderman&limit=1400&offset=100&apikey=b8e5c1e286dbfe1ff75fb79aa0ac5957

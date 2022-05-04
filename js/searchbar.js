@@ -1,5 +1,6 @@
 const searchCharacter = () => {
   const searchBar = document.getElementById("search");
+  const searchButton = document.getElementById("searchButton");
   let searchString = "";
   searchBar.addEventListener("change", (e) => (searchString = e.target.value));
   searchBar.addEventListener("keyup", (e) => {
@@ -7,6 +8,11 @@ const searchCharacter = () => {
       fetchCharacter(searchString);
     }
   });
+  /*   searchButton.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
+      fetchCharacter(searchString);
+    }
+  }); */
 };
 
 searchCharacter();

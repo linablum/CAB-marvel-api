@@ -68,7 +68,12 @@ function alphabetButtons(data) {
         let dataFiltered = data.filter((letter) => {
           return letter.name.charAt(0) == button.innerHTML;
         });
-        showCard(dataFiltered);
+        if (dataFiltered.length > 0) {
+          showCard(dataFiltered);
+        } else {
+          divContainer.innerHTML = "";
+          divContainer.append("No characters to display");
+        }
       });
   }
 }

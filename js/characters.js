@@ -24,13 +24,13 @@ async function fetchCharacters() {
         fetch(url)
           .then((res) => res.json())
           .then((res) => {
-            console.log("AllArray", allArray);
             allArray.push(...res.data.results);
             spinner.setAttribute("hidden", "hidden");
           })
       )
     );
-    console.log("allArray", allArray);
+    allArray.sort((a, b) => a.name.localeCompare(b.name));
+    console.log("allarray", allArray);
     alphabetButtons(allArray);
   } catch (err) {
     console.log(err);

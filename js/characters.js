@@ -1,9 +1,3 @@
-function getHash() {
-  const timestamp = new Date().getTime();
-  const md5Hash = md5(timestamp + API_KEY_PRIVATE_2 + API_KEY_PUBLIC_2);
-  return `apikey=${API_KEY_PUBLIC_2}&ts=${timestamp}&hash=${md5Hash}`;
-}
-
 let url =
   "http://gateway.marvel.com/v1/public/characters?" +
   getHash() +
@@ -30,7 +24,6 @@ async function fetchCharacters() {
       )
     );
     allArray.sort((a, b) => a.name.localeCompare(b.name));
-    console.log("allarray", allArray);
     alphabetButtons(allArray);
   } catch (err) {
     console.log(err);
@@ -77,8 +70,6 @@ function alphabetButtons(data) {
       });
   }
 }
-
-let divContainer = document.getElementById("container");
 
 function showCard(dataFiltered) {
   divContainer.innerHTML = "";

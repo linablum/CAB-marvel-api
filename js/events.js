@@ -1,9 +1,3 @@
-function getHash() {
-  const timestamp = new Date().getTime();
-  const md5Hash = md5(timestamp + API_KEY_PRIVATE_2 + API_KEY_PUBLIC_2);
-  return `apikey=${API_KEY_PUBLIC_2}&ts=${timestamp}&hash=${md5Hash}`;
-}
-
 let url =
   "http://gateway.marvel.com/v1/public/characters?" +
   getHash() +
@@ -26,7 +20,7 @@ async function fetchCharacters() {
           })
       )
     );
-    console.log("allArray", allArray);
+    allArray.sort((a, b) => a.name.localeCompare(b.name));
     clickCheckbox(allArray);
     spinner.setAttribute("hidden", "hidden");
   } catch (err) {
@@ -61,7 +55,6 @@ function filterEvents(data) {
       return (document.getElementById("api-data").innerHTML = "");
     }
   });
-  console.log(dataFiltered);
   showChars(dataFiltered);
 }
 

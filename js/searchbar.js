@@ -1,16 +1,9 @@
-function getHash() {
-  const timestamp = new Date().getTime();
-  const md5Hash = md5(timestamp + API_KEY_PRIVATE_2 + API_KEY_PUBLIC_2);
-  return `apikey=${API_KEY_PUBLIC_2}&ts=${timestamp}&hash=${md5Hash}`;
-}
-
 const searchCharacter = () => {
   const searchBar = document.getElementById("search");
   let searchString = "";
   searchBar.addEventListener("change", (e) => (searchString = e.target.value));
   searchBar.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
-      console.log("Bingo!");
       fetchCharacter(searchString);
     }
   });
@@ -26,7 +19,6 @@ const fetchCharacter = async (characterName) => {
     const res = await fetch(url);
     let response = await res.json();
     let marvelCharacter = response.data.results;
-    console.log("Data", response);
     showCard(marvelCharacter);
   } catch (err) {
     console.log(err);

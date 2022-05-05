@@ -1,3 +1,9 @@
+function getHash() {
+  const timestamp = new Date().getTime();
+  const md5Hash = md5(timestamp + API_KEY_PRIVATE_2 + API_KEY_PUBLIC_2);
+  return `apikey=${API_KEY_PUBLIC_2}&ts=${timestamp}&hash=${md5Hash}`;
+}
+
 const searchCharacter = () => {
   const searchBar = document.getElementById("search");
   const searchButton = document.getElementById("searchButton");
@@ -5,14 +11,10 @@ const searchCharacter = () => {
   searchBar.addEventListener("change", (e) => (searchString = e.target.value));
   searchBar.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
+      console.log("Bingo!");
       fetchCharacter(searchString);
     }
   });
-  /*   searchButton.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") {
-      fetchCharacter(searchString);
-    }
-  }); */
 };
 
 searchCharacter();

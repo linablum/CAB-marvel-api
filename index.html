@@ -44,7 +44,8 @@
                 <a class="nav-link" href="./characters.html">Characters</a>
               </li>
             </ul>
-            <form class="d-flex">
+            <!--! if you are using the keyup event you don't need this element to be a form -->
+            <div class="d-flex">
               <input
                 id="search"
                 tabindex="1"
@@ -53,14 +54,15 @@
                 placeholder="Search Character"
                 aria-label="Search Character"
               />
-              <button
+              <!--! you don't need a button if you use the keyup event -->
+              <!-- <button
                 id="searchButton"
                 class="btn btn-outline-dark"
                 type="button"
               >
                 Search
-              </button>
-            </form>
+              </button> -->
+            </div>
           </div>
         </div>
       </nav>
@@ -80,6 +82,7 @@
     <script src="./js/hash.js"></script>
     <script src="./js/config.js"></script>
     <script src="./js/searchbar.js"></script>
-    <script src="./js/main.js"></script>
+    <!--! main.js again contains only getHash() function, so you don't need it -->
+    <!-- <script src="./js/main.js"></script> -->
   </body>
 </html>

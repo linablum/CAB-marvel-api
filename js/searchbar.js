@@ -1,8 +1,10 @@
-function getHash() {
-  const timestamp = new Date().getTime();
-  const md5Hash = md5(timestamp + API_KEY_PRIVATE_2 + API_KEY_PUBLIC_2);
-  return `apikey=${API_KEY_PUBLIC_2}&ts=${timestamp}&hash=${md5Hash}`;
-}
+// ! you are already defininig getHash() in hash.js and connecting it to the same html,
+// so you don't need to define it here again
+// function getHash() {
+//   const timestamp = new Date().getTime();
+//   const md5Hash = md5(timestamp + API_KEY_PRIVATE_2 + API_KEY_PUBLIC_2);
+//   return `apikey=${API_KEY_PUBLIC_2}&ts=${timestamp}&hash=${md5Hash}`;
+// }
 
 const searchCharacter = () => {
   const searchBar = document.getElementById("search");
@@ -13,6 +15,7 @@ const searchCharacter = () => {
     if (e.key === "Enter") {
       console.log("Bingo!");
       fetchCharacter(searchString);
+      // ! clean the input text
     }
   });
 };
@@ -26,9 +29,11 @@ const fetchCharacter = async (characterName) => {
   try {
     const res = await fetch(url);
     let response = await res.json();
+    // ! if response is empty, show something to the user (for example, no characters with that name)
     let marvelCharacter = response.data.results;
     showCard(marvelCharacter);
   } catch (err) {
+    // ! if there is an error show something to the user
     console.log(err);
   }
 };

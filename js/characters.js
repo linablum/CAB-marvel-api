@@ -1,8 +1,9 @@
-function getHash() {
-  const timestamp = new Date().getTime();
-  const md5Hash = md5(timestamp + API_KEY_PRIVATE_2 + API_KEY_PUBLIC_2);
-  return `apikey=${API_KEY_PUBLIC_2}&ts=${timestamp}&hash=${md5Hash}`;
-}
+//  ! again no need for repeating the getHash() function if you link the hash.js file
+// function getHash() {
+//   const timestamp = new Date().getTime();
+//   const md5Hash = md5(timestamp + API_KEY_PRIVATE_2 + API_KEY_PUBLIC_2);
+//   return `apikey=${API_KEY_PUBLIC_2}&ts=${timestamp}&hash=${md5Hash}`;
+// }
 
 let url =
   "http://gateway.marvel.com/v1/public/characters?" +
@@ -31,6 +32,7 @@ async function fetchCharacters() {
     );
     allArray.sort((a, b) => a.name.localeCompare(b.name));
     alphabetButtons(allArray);
+    console.log("allArray", allArray);
   } catch (err) {
     console.log(err);
   }
@@ -41,7 +43,9 @@ fetchCharacters();
 let divAlphabet = document.getElementById("alphabet");
 
 function alphabetButtons(data) {
+  // ! don't create all the letters if you are not fetching all the characters, however good that you are showing "No characters to display"
   const alphabetLowerCase = [..."abcdefghijklmnopqrstuvwxyz"];
+  // ! if you are anyway hardcoding the letters of the alphabet, why don't you write them directly upper case?
   const alphabet = alphabetLowerCase.map((letter) => letter.toUpperCase());
   let divRow = document.createElement("div");
   divRow.classList.add("row");
@@ -76,7 +80,11 @@ function alphabetButtons(data) {
       });
   }
 }
-
+// ! you are defining showCard() is every file (characters.js, searchbar.js, events.js)
+// ! if these functions are creating exactly the same kind of cards, you could move the showCard() function to a showCard.js file and link it to
+// ! all the html pages that need it (similarly to the hash.js file and getHash() function)
+// ! if the only difference between showCard() here and showCard() in searchbar.js is that you don't show the description of the character,
+// ! you could pass a "flag" to the function (ex: showDescription = true or showDescription = false) and check that in the showCard() function
 function showCard(dataFiltered) {
   divContainer.innerHTML = "";
   for (i = 0; i < dataFiltered.length; i++) {

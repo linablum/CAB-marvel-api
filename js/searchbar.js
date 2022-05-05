@@ -1,11 +1,3 @@
-// ! you are already defininig getHash() in hash.js and connecting it to the same html,
-// so you don't need to define it here again
-// function getHash() {
-//   const timestamp = new Date().getTime();
-//   const md5Hash = md5(timestamp + API_KEY_PRIVATE_2 + API_KEY_PUBLIC_2);
-//   return `apikey=${API_KEY_PUBLIC_2}&ts=${timestamp}&hash=${md5Hash}`;
-// }
-
 const searchCharacter = () => {
   const searchBar = document.getElementById("search");
   const searchButton = document.getElementById("searchButton");

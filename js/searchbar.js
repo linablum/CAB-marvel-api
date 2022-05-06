@@ -1,13 +1,12 @@
 const searchCharacter = () => {
   const searchBar = document.getElementById("search");
-  const searchButton = document.getElementById("searchButton");
   let searchString = "";
   searchBar.addEventListener("change", (e) => (searchString = e.target.value));
   searchBar.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
-      console.log("Bingo!");
+      document.getElementById("search").value = "";
+      divContainer.innerHTML = "";
       fetchCharacter(searchString);
-      // ! clean the input text
     }
   });
 };
@@ -20,10 +19,15 @@ const fetchCharacter = async (characterName) => {
     getHash();
   try {
     const res = await fetch(url);
+    console.log(res);
     let response = await res.json();
-    // ! if response is empty, show something to the user (for example, no characters with that name)
-    let marvelCharacter = response.data.results;
-    showCard(marvelCharacter);
+    console.log(response);
+    if (response.data.total > 0) {
+      let marvelCharacter = response.data.results;
+      showCard(marvelCharacter);
+    } else {
+      divContainer.append("No characters with that name");
+    }
   } catch (err) {
     // ! if there is an error show something to the user
     console.log(err);

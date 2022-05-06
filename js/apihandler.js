@@ -35,6 +35,6 @@ async function fetchCharacters() {
     }
     spinner.setAttribute("hidden", "hidden");
   } catch (err) {
-    console.log(err);
+    cdivContainer.append("Oh, something went wrong: " + err.message);
   }
 }

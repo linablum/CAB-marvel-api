@@ -19,9 +19,7 @@ const fetchCharacter = async (characterName) => {
     getHash();
   try {
     const res = await fetch(url);
-    console.log(res);
     let response = await res.json();
-    console.log(response);
     if (response.data.total > 0) {
       let marvelCharacter = response.data.results;
       showCard(marvelCharacter);
@@ -29,8 +27,7 @@ const fetchCharacter = async (characterName) => {
       divContainer.append("No characters with that name");
     }
   } catch (err) {
-    // ! if there is an error show something to the user
-    console.log(err);
+    divContainer.append("Oh, something went wrong: " + err.message);
   }
 };
 

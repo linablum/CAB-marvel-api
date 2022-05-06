@@ -1,31 +1,3 @@
-// ! same general comment you could have a file called fetchData.js in which you define the fetch function and then just link it to the html
-// ! files that need it
-
-// ! if the only difference between showCard() here and showCard() in searchbar.js is that you don't show the description of the character,
-// ! you could pass a "flag" to the function (ex: showDescription = true or showDescription = false) and check that in the showCard() function
-
-async function fetchCharacters() {
-  try {
-    const allArray = [];
-    const data = await Promise.all(
-      urls.map((url) =>
-        fetch(url)
-          .then((res) => res.json())
-          .then((res) => {
-            allArray.push(...res.data.results);
-          })
-      )
-    );
-    allArray.sort((a, b) => a.name.localeCompare(b.name));
-    // ! you could apply the concept of "flag" here too, depending on which page you are (you can check the document.title to know in which page
-    // ! you are) you can call clickCheckboxes() or alphabetButtons()
-    clickCheckbox(allArray);
-    spinner.setAttribute("hidden", "hidden");
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 fetchCharacters();
 
 function clickCheckbox(allArray) {

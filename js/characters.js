@@ -1,26 +1,3 @@
-const spinner = document.getElementById("spinner");
-
-async function fetchCharacters() {
-  try {
-    const allArray = [];
-    await Promise.all(
-      urls.map((url) =>
-        fetch(url)
-          .then((res) => res.json())
-          .then((res) => {
-            allArray.push(...res.data.results);
-            spinner.setAttribute("hidden", "hidden");
-          })
-      )
-    );
-    allArray.sort((a, b) => a.name.localeCompare(b.name));
-    alphabetButtons(allArray);
-    console.log("allArray", allArray);
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 fetchCharacters();
 
 let divAlphabet = document.getElementById("alphabet");

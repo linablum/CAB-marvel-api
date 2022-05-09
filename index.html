@@ -57,8 +57,38 @@
     </header>
     <main>
       <div class="p-5">
-        <h1 class="mb-3">Marvel</h1>
+        <h1 class="mb-5">Marvel Up</h1>
+        <div class="ms-0 container">
+          <div class="row">
+            <div class="col-6">
+              <p class="fs-5">
+                Look out for your favourite characters in the Marvel Universe.
+                You can use the search bar, find characters by alphabet or look
+                for some specific events and which characters took part in it.<p>
+                <button
+                  class="btn btn-outline-light mt-4"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseWidthExample"
+                  aria-expanded="false"
+                  aria-controls="collapseWidthExample"
+                >
+                  Show more
+                </button></p>
+              </p>
+            </div>
+            <div class="col"></div>
+          </div>
+        </div>
         <div id="container"></div>
+        <div style="min-height: 120px">
+          <div class="collapse collapse-horizontal" id="collapseWidthExample">
+            <div class="card card-body bg-transparent" style="width: 300px">
+              This is some placeholder content for a horizontal collapse. It's
+              hidden by default and shown when triggered.
+            </div>
+          </div>
+        </div>
       </div>
     </main>
     <script src="http://www.myersdaily.org/joseph/javascript/md5.js"></script>
@@ -70,6 +100,5 @@
     <script src="./js/config.js"></script>
     <script src="./js/apihandler.js"></script>
     <script src="./js/searchbar.js"></script>
-    <script src="./js/main.js"></script>
   </body>
 </html>

@@ -23,6 +23,9 @@ const fetchCharacter = async (characterName) => {
     if (response.data.total > 0) {
       let marvelCharacter = response.data.results;
       showCard(marvelCharacter);
+      if (window.location.pathname == "/events.html") {
+        document.getElementById("api-data").innerHTML = "";
+      }
     } else {
       divContainer.append("No characters with that name");
     }

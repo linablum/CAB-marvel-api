@@ -5,6 +5,7 @@ function clickCheckbox(allArray) {
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener("change", () => {
       filterEvents(allArray);
+      divContainer.innerHTML = "";
     });
   });
 }

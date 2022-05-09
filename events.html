@@ -35,9 +35,6 @@
                 <a class="nav-link" href="./index.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./about.html">About</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link active" aria-current="events" href="#"
                   >Events</a
                 >
@@ -62,7 +59,13 @@
     </header>
     <main>
       <div class="p-5">
-        <h1 class="mb-3">Characters In Events</h1>
+        <h1 class="mb-5">Characters In Events</h1>
+        <div>
+          <p>
+            Take a look which characters took part in some big events. You can
+            see who is in multiple events by checking the boxes.
+          </p>
+        </div>
         <div
           class="btn-group mb-4"
           role="group"
@@ -76,7 +79,6 @@
             autocomplete="off"
           />
           <label class="btn btn-outline-light" for="btncheck1">Civil War</label>
-
           <input
             type="checkbox"
             class="btn-check"
@@ -87,7 +89,6 @@
           <label class="btn btn-outline-light" for="btncheck2"
             >Age of Ultron</label
           >
-
           <input
             type="checkbox"
             class="btn-check"
@@ -136,6 +137,7 @@
           </div>
         </div>
         <ul id="api-data"></ul>
+        <div id="container"></div>
       </div>
     </main>
     <script src="http://www.myersdaily.org/joseph/javascript/md5.js"></script>

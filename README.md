@@ -31,7 +31,7 @@ How to get a copy and locally run it:
 
   Clone the repo
    ```bash
-   git clone https://github.com/linablum/cab-leafy
+   git clone https://github.com/linablum/cab-marvel-api
    ```
    
    Open index.html file in your browser.
